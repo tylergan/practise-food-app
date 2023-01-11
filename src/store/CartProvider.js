@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { useReducer, useEffect } from "react"
 import CartContext from "./cart-context"
 
 const defaultCartState = {
@@ -52,6 +52,11 @@ const cartReducer = (state, action) => {
             items: updatedItems,
             totalAmount: updatedTotalAmount,
         }
+    } else if (action.type === 'REPLACE') {
+        return {
+            items: action.items,
+            totalAmount: action.totalAmount,
+        }
     }
     return defaultCartState
 }
@@ -59,6 +64,24 @@ const cartReducer = (state, action) => {
 const CartProvider = (props) => {
     const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState)
 
+    // load cart from local storage if it exists
+    useEffect(() => {
+        const storedCart = localStorage.getItem('cart')
+        const storedCartParsed = JSON.parse(storedCart)
+        if (storedCartParsed) {
+            dispatchCartAction({
+                type: 'REPLACE', 
+                items: storedCartParsed.items, 
+                totalAmount: storedCartParsed.totalAmount 
+            })
+        }
+    }, [])
+
+    // update local storage if cart items change
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cartState))
+    }, [cartState])
+    
     const addItemToCartHandler = (item) => {
         dispatchCartAction({
             type: 'ADD',
