@@ -4,7 +4,7 @@ export default function CartItem(props) {
     const price = `$${props.price.toFixed(2)}`
 
     return (
-        <li id={props.key} className={styles['cart-item']}>
+        <li id={props.id} className={styles['cart-item']}>
             <div>
                 <h2>{props.name}</h2>
                 <div className={styles.summary}>

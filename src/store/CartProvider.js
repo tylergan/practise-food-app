@@ -49,15 +49,18 @@ const cartReducer = (state, action) => {
         const updatedTotalAmount = state.totalAmount - existingCartItem.price
 
         return {
+            ...state,
             items: updatedItems,
             totalAmount: updatedTotalAmount,
         }
     } else if (action.type === 'REPLACE') {
         return {
+            ...state,
             items: action.items,
             totalAmount: action.totalAmount,
         }
     }
+
     return defaultCartState
 }
 

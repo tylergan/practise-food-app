@@ -3,6 +3,7 @@ import CartContext from '../../store/cart-context'
 import Modal from '../UI/Modal'
 import CartItem from './CartItem.js'
 import styles from './Cart.module.css'
+// import FocusTrap from 'focus-trap-react'
 
 export default function Cart(props) {
     const cartCtx = useContext(CartContext)
@@ -27,7 +28,7 @@ export default function Cart(props) {
             />
         ))}
     </ul>
-
+    
     return (
         <Modal onClose={props.onClose}>
             <h2>Your Shopping Cart</h2>
