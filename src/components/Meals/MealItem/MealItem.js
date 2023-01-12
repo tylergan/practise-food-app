@@ -28,4 +28,4 @@ export default function MealItem(props) {
             </div>
         </li>
     );
-    }
+}
