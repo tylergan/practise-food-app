@@ -45,7 +45,7 @@ const Checkout = (props) => {
     const confirmHandler = (event) => {
         event.preventDefault()
 
-        // if we confirm the form, it is automatically considered as "touched"
+        // if we confirm the form, it is automatically considered as "touched"; the blur handlers only set fields to "touched"
         nameBlurHandler()
         streetBlurHandler()
         postalBlurHandler()
@@ -65,6 +65,7 @@ const Checkout = (props) => {
         }
 
         // send the data to database
+        props.onConfirm(userData)
 
         resetNameInput()
         resetStreetInput()
